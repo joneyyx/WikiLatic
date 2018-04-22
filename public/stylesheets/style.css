@@ -1,3 +1,27 @@
+.navbar-static-top {
+  border-color: #e7e7e7;
+  background-color: #fff;
+  box-shadow: 0px 1px 11px 2px rgba(42, 42, 42, 0.1);
+  border-top: 4px solid #00b5ad;
+  margin-bottom: 40px;
+  margin-top: 0px;
+}
+
+.navbar-right{
+  float: right!important;
+  margin-right: -15px;
+  text-align: right;
+}
+
+.navbar-right a{
+  text-align: right;
+}
+
+.nav-item{
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
 .footer {
   position: absolute;
   bottom: 0;
