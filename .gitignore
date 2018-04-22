@@ -63,3 +63,4 @@ typings/
 .idea
 # Dependency directory
 bower_components
+package.json
