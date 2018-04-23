@@ -15,7 +15,6 @@
     "jquery": "^3.3.1",
     "morgan": "~1.9.0",
     "popper.js": "^1.14.3",
-    "pug": "2.0.0-beta11",
-    "theia-sticky-sidebar": "^1.7.0"
+    "pug": "2.0.0-beta11"
   }
 }
