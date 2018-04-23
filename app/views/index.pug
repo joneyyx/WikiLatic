@@ -1,4 +1,29 @@
 extends layouts/layout
 
 block content
-  p I'm Gary~I am pretty!
+  div.container-fluid
+    div.row
+      div.col-md-8.col-lg-8.offset-md-2.offset-lg-2.main-heading
+        h1 WikiLatic
+        p
+          | WikiLatic is a data analytic web application for articles from Wikipedia. This application have three
+          | main functions: Overall Analytics, Individual Analytics and Author Analytics.
+      div.col-lg-4.col-md-4
+        div.func
+          img(width='100%' src='images/1.jpg')
+          h2 Overall Analytic
+          button.btn.btn-outline-primary View
+      div.col-lg-4.col-md-4
+        div.func
+          img(width='100%' src='images/1.jpg')
+          h2 Individual Analytic
+          button.btn.btn-outline-primary View
+      div.col-lg-4.col-md-4
+        div.func
+          img(width='100%' src='images/1.jpg')
+          h2 Author Analytic
+          button.btn.btn-outline-primary View
+      //div.col-lg-2.col-md-2.offset-lg-5.offset-md-5
+      //  a(href='#')
+      //    button.btn.btn-outline-success.login-for-funcs Login To Use Functions
+
