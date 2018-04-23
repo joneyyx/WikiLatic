@@ -1,11 +1,12 @@
-nav.navbar.navbar-expand-lg.navbar-light.bg-light.navbar-static-top
-  div.container
+nav.navbar.navbar-expand-lg.navbar-dark.bg-info.navbar-static-top
+  div.container-fluid
     a.navbar-brand(href='#') WikiLatic
-    button.navbar-toggler(type='button', data-toggle='collapse' data-target='#navbarNav')
+    button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded="false", aria-controls='navbar', aria-label="Toggle navigation")
       span.navbar-toggler-icon
-    div.collapse.navbar-collapse#navbarNav
-      ul.navbar-nav.navbar-right
+    div.collapse.navbar-collapse#navbar
+      ul.navbar-nav.navbar-right.ml-auto
         li.nav-item
           a(href='#') LOG IN
         li.nav-item
           a(href='#') SIGN UP
+

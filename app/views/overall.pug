@@ -1,0 +1,140 @@
+extends layouts/layout
+
+block content
+  div.container-fluid
+    div.row
+      // Sidebar
+      div#sidebar.col-md-2.col-lg-2
+        div.panel
+          div.panel-body
+            a(href='#articleRank').sidebar-heading
+              strong Article Rank
+            div.sidebar-body
+              a(href='#byReversion') By Reversion
+              a(href='#byUser') By User
+              a(href='#byHistory') By History
+            a(href='#charts').sidebar-heading
+              strong Charts
+
+
+      // Content-right
+      div#content-right.col-md-10.col-lg-10.offset-md-2
+        div.panel
+          div.panel-body
+
+            // Article Rank
+            div#articleRank
+              h1 Article Rank
+              hr
+              div
+                div#byReversion.content
+                  h2 Rank By Reversion
+                  form.form-inline
+                    input.form-control(type='text', placeholder='Num of articles')
+                    input.btn.btn-outline-primary(type='submit', value='Search')
+                  div.content-body.row
+                    div.col-md-6#max-reversion
+                      table.table.table-hover
+                        thead.table-primary
+                          tr
+                            h5 Top X Articles With Most Reversion
+                          th #
+                          th Article
+                          th Num of reversion
+                        tbody
+
+                    div.col-md-6#min-reversion
+                      table.table.table-hover
+                        thead.table-primary
+                          tr
+                            h5 Top X Articles With Least Reversion
+                          th #
+                          th Article
+                          th Num of reversion
+                        tbody
+
+                div#byUser.content
+                  h2 Rank By User
+                  div.content-body.row
+                    div.col-md-6#max-users
+                      table.table.table-hover
+                        thead.table-primary
+                          tr
+                            h5 The Articles Edited By Most Users
+                          th #
+                          th Article
+                          th Num of users
+                        tbody
+                          tbody
+                            tr
+                              td 1
+                              td #{title}
+                              td #{num}
+
+                    div.col-md-6#min-users
+                      table.table.table-hover
+                        thead.table-primary
+                          tr
+                            h5 The Article Edited By Least Users
+                          th #
+                          th Article
+                          th Num of users
+                        tbody
+                          tbody
+                            tr
+                              td 1
+                              td #{title}
+                              td #{num}
+
+                div#byHistory.content
+                  h2 Rank By History
+                  div.content-body.row
+                    div.col-md-6#max-history
+                      table.table.table-hover
+                        thead.table-primary
+                          tr
+                            h5 Top 3 Articles With Longest History
+                          th #
+                          th Article
+                          th History (year)
+                        tbody
+                          tr
+                            td 1
+                            td #{title}
+                            td #{num}
+                          tr
+                            td 2
+                            td #{title}
+                            td #{num}
+                          tr
+                            td 3
+                            td #{title}
+                            td #{num}
+
+                    div.col-md-6#min-history
+                      table.table.table-hover
+                        thead.table-primary
+                          tr
+                            h5 Top 3 Articles With shortest History
+                          th #
+                          th Article
+                          th History (year)
+                        tbody
+                          tr
+                            td 1
+                            td #{title}
+                            td #{num}
+                          tr
+                            td 2
+                            td #{title}
+                            td #{num}
+                          tr
+                            td 3
+                            td #{title}
+                            td #{num}
+
+            // Charts
+            div#charts
+              h1 Charts
+              hr
+
