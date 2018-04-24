@@ -185,6 +185,12 @@ img {
 
 #result {
     margin: 2em 0;
+    text-align: center;
+}
+
+#result table {
+    width: 60%;
+    margin: 0 auto;
 }
 
 /* msg */
