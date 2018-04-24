@@ -5,6 +5,7 @@ a {
 }
 
 /*header*/
+
 .navbar-static-top {
     border-color: #e7e7e7;
     background-color: #fff;
@@ -31,7 +32,9 @@ a {
 }
 
 /*footer*/
+
 /* Sticky footer styles */
+
 html {
     position: relative;
     min-height: 100%;
@@ -62,7 +65,9 @@ body {
 }
 
 /*overall*/
+
 /*sidebar*/
+
 #sidebar {
     position: fixed;
 }
@@ -101,6 +106,7 @@ body {
 }
 
 /*content-right*/
+
 .content {
     margin: 20px;
 }
@@ -114,11 +120,12 @@ body {
     font-weight: bolder;
 }
 
-#byReversion form {
+form {
     margin: 20px 0 0 40px;
 }
 
-#byReversion form input {
+form input,
+form h1 {
     margin-right: 20px;
 }
 
@@ -156,4 +163,49 @@ img {
 
 .login-for-funcs {
     text-align: center;
+}
+
+/* Individual Analytic */
+
+#search-bar form h2 {
+    margin-right: 3em;
+    color: white;
+    display: inline;
+}
+
+#search-bar {
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+#search-bar form>div {
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#result {
+    margin: 2em 0;
+    text-align: center;
+}
+
+#result table {
+    width: 60%;
+    margin: 0 auto;
+}
+
+/* msg */
+
+.suc,
+.err {
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+}
+
+.suc {
+    background-color: #dff0d8;
+}
+
+.err {
+    background-color: rgb(252, 180, 180);
 }
