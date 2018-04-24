@@ -1,0 +1,30 @@
+extends layouts/layout
+
+block content
+    .container
+        #search-bar.bg-secondary
+            form.form-inline
+                div
+                    h2 Find an author
+                    input.form-control(type='text', placeholder='Author name')
+                    input.btn.btn-outline-light(type='submit', value='Search')
+        #result
+            #table-1
+                table.table.table-hover
+                    thead.table-primary
+                        tr
+                        h5 Articles changed by #{title}
+                        th Username
+                        th Contribution
+                    tbody
+            #table-2
+                table.table.table-hover
+                    thead.table-primary
+                        tr
+                        h5 Articles changed by #{title}
+                        th Username
+                        th Contribution
+                        th Timestamp
+                    tbody
+            button.btn.btn-success Show Timestamp
+        #charts
