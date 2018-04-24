@@ -1,0 +1,22 @@
+extends layouts/layout
+
+block content
+    .container
+        #search-bar.bg-secondary
+            form.form-inline
+                div
+                    h2 Find a article
+                    input.form-control(type='text', placeholder='Title of article')
+                    input.btn.btn-outline-light(type='submit', value='Search')
+        #result
+            h2 Article title: #{title}
+            h2 Num of reversion : #{title}
+            table.table.table-hover(width='700px')
+                thead.table-primary
+                    tr
+                    h5 Top 5 Contributors
+                    th Username
+                    th Contribution
+                tbody
+        #charts
+    
