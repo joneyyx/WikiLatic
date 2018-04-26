@@ -45,6 +45,6 @@ app.use(function (err, req, res, next) {
 });
 
 // flash
-app.use(flash());
+// app.use(flash());
 
 module.exports = app;
