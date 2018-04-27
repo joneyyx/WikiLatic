@@ -1,26 +1,38 @@
 let express = require('express');
 let router = express.Router();
+let registerController = require('../app/controllers/registerController');
 
-/* GET home page. */
+/* GET routers. */
 router.get('/', function (req, res, next) {
-    res.render('index', {title: 'Express'});
+    res.render('index', {
+        title: 'WikiLatic',
+        user: req.session.user,
+        success: req.flash('success').toString(),
+        error: req.flash('error').toString()});
 });
 
 router.get('/login', function (req, res, next) {
-    res.render('login');
+    res.render('login', {title: 'Login'});
 });
 
 router.get('/logout', function (req, res, next) {
     res.redirect('index');
 });
 
-router.get('/signup', function (req, res, next) {
-    res.render('sign-up');
+router.get('/register', function (req, res, next) {
+    res.render('register', {
+        title: 'Login',
+        success: req.flash('success').toString(),
+        error: req.flash('error').toString()
+    });
 });
 
-router.post('/signup', function (req, res, next) {
+/* POST routers. */
+router.post('/login', function (req, res, next) {
 
 });
+
+router.post('/register', registerController.signUp);
 
 module.exports = router;
 
