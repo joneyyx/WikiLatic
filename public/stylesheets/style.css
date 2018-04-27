@@ -211,3 +211,9 @@ img {
 .err {
     background-color: rgb(252, 180, 180);
 }
+
+/* Author Analytic */
+
+#result button {
+    margin: 1em;
+}
