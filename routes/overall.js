@@ -1,12 +1,8 @@
 let express = require('express');
 let router = express.Router();
+let overallController = require('../app/controllers/overallController');
 
 /* GET overall analytic page. */
-router.get('/', function(req, res, next) {
-    res.render('overall', {
-        title: 'Overall Analytics',
-        user: req.session.user
-    });
-});
+router.get('/', overallController.overallController);
 
 module.exports = router;
