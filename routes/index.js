@@ -20,7 +20,9 @@ router.get('/login', function (req, res, next) {
 });
 
 router.get('/logout', function (req, res, next) {
-    res.redirect('index');
+    req.session.user = null;
+    req.flash('success', 'You have logged out.');
+    res.redirect('/');
 });
 
 router.get('/register', function (req, res, next) {
