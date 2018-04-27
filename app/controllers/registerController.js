@@ -13,7 +13,7 @@ exports.signUp = function (req, res, next) {
     // check registered
     User.findOne({username: postData.username, email: postData.email}, function (err, data) {
         if (data) {
-            req.flash('error', 'The username/email have already been registered.');
+            req.flash('error', 'The username/email have already been taken.');
             // console.log(data);
             res.redirect('/register');
         } else {
