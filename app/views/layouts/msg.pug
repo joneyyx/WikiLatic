@@ -1,6 +1,5 @@
 .container-fluid
-    if msg
-        if msg.suc
-            div.suc= {msg.suc}
-        else if msg.err
-            div.err= {msd.err}
+    if success
+        div.suc= success
+    if error
+        div.err= error
