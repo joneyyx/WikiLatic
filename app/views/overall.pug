@@ -29,8 +29,8 @@ block content
               div
                 div#byReversion.content
                   h2 Rank By Reversion
-                  form.form-inline
-                    input.form-control(type='text', placeholder='Num of articles')
+                  form.form-inline(method='POST')
+                    input.form-control(type='text', placeholder='Num of articles', name='rank')
                     input.btn.btn-outline-primary(type='submit', value='Search')
                   div.content-body.row
                     div.col-md-6#max-reversion
@@ -42,6 +42,13 @@ block content
                           th Article
                           th Num of reversion
                         tbody
+                        -var i=1;
+                        for  article in maxRev
+                          tr
+                            td= i
+                            td= article.title
+                            td= article.count
+                          -i++;
 
                     div.col-md-6#min-reversion
                       table.table.table-hover
@@ -52,6 +59,13 @@ block content
                           th Article
                           th Num of reversion
                         tbody
+                        -i=1;
+                        for  article in minRev
+                          tr
+                            td= i
+                            td= article.title
+                            td= article.count
+                          -i++;
 
                 div#byUser.content
                   h2 Rank By User

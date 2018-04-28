@@ -20,5 +20,6 @@ let articleSchema = new Schema({
 });
 
 module.exports = function (title) {
-    mongoose.model('article', articleSchema, title);
+    return mongoose.model('article', articleSchema, title);
 };
+// module.exports = mongoose.model('article', articleSchema, 'Japan');
