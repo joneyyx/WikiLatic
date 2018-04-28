@@ -22,13 +22,13 @@ let compare = function (prop) {
 
 
 /** get max and min number of reversion and their article titles */
-function getMaxAndMin(revCounts, rank) {
+function getMaxAndMin(Counts, rank) {
     let result = [],
         max = [],
         min = [];
     for (let i = 0; i < rank; i++) {
-        min.push(revCounts[i]);
-        max.push(revCounts[revCounts.length - i - 1]);
+        min.push(Counts[i]);
+        max.push(Counts[Counts.length - i - 1]);
     }
     result.push(max, min);
     // console.log(result);
@@ -82,8 +82,76 @@ exports.revRank = function (req, res, next) {
 
 /** controller for Rank By Author */
 exports.authRank = function (req, res, next) {
+    let userCounts = [];
 
+    // iterator 强行把异步变同步
+    (function iterator(i) {
+        // check if all collections have been traversed
+        if (i === titles.length) {
+            userCounts = userCounts.sort(compare('count'));
+
+            // find top @rank of articles with max and min number of reversion, according @req.body.rank
+            // let rank = req.body.rank;
+            let result = getMaxAndMin(userCounts, 1);
+
+            console.log(result);
+
+            req.session.maxUser = result[0];
+            req.session.minUser = result[1];
+
+            next();
+        }
+
+        // traverse collections and count user number of each article
+        Article(titles[i]).aggregate([
+            {
+                $project: {
+                    user: 1
+                }
+            },
+            {
+                $group: {
+                    _id: "$user"
+                }
+            }
+        ]).exec(function (err, turnover) {
+            if (err) {
+                throw err;
+            }
+            userCounts.push({
+                title: titles[i],
+                count: turnover.length
+            });
+
+            iterator(i + 1);
+        });
+    })(0);
 };
+
+// for (let title of titles) {
+// Article(title).aggregate([
+//     {
+//         $project: {
+//             user: 1
+//         }
+//     },
+//     {
+//         $group: {
+//             _id: "$user"
+//         }
+//     }
+// ]).exec(function (err, turnover) {
+//     if (err){
+//         throw err;
+//     }
+//     userCount.push({
+//         title: title,
+//         userCount: turnover.length
+//     });
+// });
+// }
+// }
+// ;
 
 
 /** controller for Rank By History */

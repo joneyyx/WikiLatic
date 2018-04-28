@@ -37,7 +37,7 @@ block content
                       table.table.table-hover
                         thead.table-primary
                           tr
-                            h5 Top X Articles With Most Reversion
+                            h5 Top #{rank} Articles With Most Reversion
                           th #
                           th Article
                           th Num of reversion
@@ -54,7 +54,7 @@ block content
                       table.table.table-hover
                         thead.table-primary
                           tr
-                            h5 Top X Articles With Least Reversion
+                            h5 Top #{rank} Articles With Least Reversion
                           th #
                           th Article
                           th Num of reversion
@@ -82,8 +82,8 @@ block content
                           tbody
                             tr
                               td 1
-                              td #{title}
-                              td #{num}
+                              td= maxUser[0].title
+                              td= maxUser[0].count
 
                     div.col-md-6#min-users
                       table.table.table-hover
@@ -97,8 +97,8 @@ block content
                           tbody
                             tr
                               td 1
-                              td #{title}
-                              td #{num}
+                              td= minUser[0].title
+                              td= minUser[0].count
 
                 div#byHistory.content
                   h2 Rank By History
