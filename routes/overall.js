@@ -3,7 +3,7 @@ let router = express.Router();
 let overallController = require('../app/controllers/overallController');
 
 router.use(overallController.revRank);
-// router.use(overallController.authRank);
+router.use(overallController.authRank);
 
 /* GET overall analytic page. */
 router.get('/', function (req, res, next) {
