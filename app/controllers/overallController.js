@@ -38,17 +38,18 @@ function getMaxAndMin(Counts, rank) {
 
 /** controller for Rank By Reversion */
 exports.revRank = function (req, res, next) {
-    // set @revCount to store the number of reversions of each article
-    let revCounts = [];
+    // set array to store the counts of each article
+    let revCounts = [],
+        userCounts = [];
 
     // iterator 强行把异步变同步
     (function iterator(i) {
         // check if all collections have been traversed
         if (i === titles.length) {
             revCounts = revCounts.sort(compare('count'));
-            // console.log(revCounts);
+            userCounts = userCounts.sort(compare('count'));
 
-            // find top @rank of articles with max and min number of reversion, according @req.body.rank
+            // find top @rank articles with max and min number of reversion, according @req.body.rank
             let rank = req.body.rank;
             let result = [];
 
@@ -62,6 +63,14 @@ exports.revRank = function (req, res, next) {
             req.session.maxRev = result[0];
             req.session.minRev = result[1];
 
+            // find top 1 article with max and min number of users
+            result = getMaxAndMin(userCounts, 1);
+
+            // console.log(result);
+
+            req.session.maxUser = result[0];
+            req.session.minUser = result[1];
+
             next();
         }
 
@@ -74,33 +83,8 @@ exports.revRank = function (req, res, next) {
                 title: titles[i],
                 count: count
             });
-            iterator(i + 1);
-        })
-    })(0);
-};
-
-
-/** controller for Rank By Author */
-exports.authRank = function (req, res, next) {
-    let userCounts = [];
-
-    // iterator 强行把异步变同步
-    (function iterator(i) {
-        // check if all collections have been traversed
-        if (i === titles.length) {
-            userCounts = userCounts.sort(compare('count'));
-
-            // find top @rank of articles with max and min number of reversion, according @req.body.rank
-            // let rank = req.body.rank;
-            let result = getMaxAndMin(userCounts, 1);
-
-            console.log(result);
-
-            req.session.maxUser = result[0];
-            req.session.minUser = result[1];
-
-            next();
-        }
+            // iterator(i + 1);
+        });
 
         // traverse collections and count user number of each article
         Article(titles[i]).aggregate([
@@ -125,33 +109,28 @@ exports.authRank = function (req, res, next) {
 
             iterator(i + 1);
         });
+
     })(0);
 };
 
-// for (let title of titles) {
-// Article(title).aggregate([
-//     {
-//         $project: {
-//             user: 1
-//         }
-//     },
-//     {
-//         $group: {
-//             _id: "$user"
-//         }
-//     }
-// ]).exec(function (err, turnover) {
-//     if (err){
-//         throw err;
-//     }
-//     userCount.push({
-//         title: title,
-//         userCount: turnover.length
-//     });
-// });
-// }
-// }
-// ;
+
+/** controller for Rank By Author */
+exports.authRank = function (req, res, next) {
+
+    // iterator 强行把异步变同步
+    (function iterator(i) {
+        // check if all collections have been traversed
+        if (i === titles.length) {
+            userCounts = userCounts.sort(compare('count'));
+
+
+
+            next();
+        }
+
+
+    })(0);
+};
 
 
 /** controller for Rank By History */
