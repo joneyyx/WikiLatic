@@ -75,8 +75,6 @@ module.exports = function (req, res, next) {
             req.session.minUser = result[1];
 
             /** find top 3 articles with max and min number of history */
-            result = getMaxAndMin(histories, 3);
-
             req.session.maxHistory = result[0];
             req.session.minHistory = result[1];
 

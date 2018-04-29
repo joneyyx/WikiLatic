@@ -1,7 +1,9 @@
 let express = require('express');
 let router = express.Router();
 let overallController = require('../app/controllers/overallController');
+let authController = require('../app/controllers/authController');
 
+router.use(authController);
 router.use(overallController);
 
 /* GET overall analytic page. */
