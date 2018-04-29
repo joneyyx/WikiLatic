@@ -40,7 +40,10 @@ function getMaxAndMin(Counts, rank) {
 module.exports = function (req, res, next) {
     // set array to store the counts of each article
     let revCounts = [],
-        userCounts = [];
+        userCounts = [],
+        histories = [],
+        oldest,
+        latest;
 
     // iterator 强行把异步变同步
     (function iterator(i) {
@@ -48,8 +51,9 @@ module.exports = function (req, res, next) {
         if (i === titles.length) {
             revCounts = revCounts.sort(compare('count'));
             userCounts = userCounts.sort(compare('count'));
+            histories = histories.sort(compare('history'));
 
-            // find top @rank articles with max and min number of reversion, according @req.body.rank
+            /** find top @rank articles with max and min number of reversions, according @req.body.rank */
             let rank = req.body.rank;
             let result = [];
 
@@ -64,18 +68,22 @@ module.exports = function (req, res, next) {
             req.session.maxRev = result[0];
             req.session.minRev = result[1];
 
-            // find top 1 article with max and min number of users
+            /** find top 1 article with max and min number of users */
             result = getMaxAndMin(userCounts, 1);
-
-            // console.log(result);
 
             req.session.maxUser = result[0];
             req.session.minUser = result[1];
 
+            /** find top 3 articles with max and min number of history */
+            result = getMaxAndMin(histories, 3);
+
+            req.session.maxHistory = result[0];
+            req.session.minHistory = result[1];
+
             next();
         }
 
-        // traverse collections and count reversion number of each article
+        /** traverse collections and count reversion number of each article */
         Article(titles[i]).count(function (err, count) {
             if (err) {
                 throw err;
@@ -84,10 +92,9 @@ module.exports = function (req, res, next) {
                 title: titles[i],
                 count: count
             });
-            // iterator(i + 1);
         });
 
-        // traverse collections and count user number of each article
+        /** traverse collections and count user number of each article */
         Article(titles[i]).aggregate([
             {
                 $project: {
@@ -108,14 +115,24 @@ module.exports = function (req, res, next) {
                 count: turnover.length
             });
 
-            iterator(i + 1);
+            // iterator(i + 1);
         });
 
+        /** traverse collections and calculate history */
+        // find oldest timestamp
+        Article(titles[i]).findOne().sort('timestamp').exec(function (err, post) {
+            oldest = post.timestamp.substring(0, 4);
+        });
+
+        // find latest timestamp
+        Article(titles[i]).findOne().sort('-timestamp').exec(function (err, post) {
+            latest = post.timestamp.substring(0, 4);
+            // console.log('..'+ oldest, latest);
+            histories.push({
+                title: titles[i],
+                history: latest - oldest
+            });
+            iterator(i + 1);
+        });
     })(0);
-};
-
-
-/** controller for Rank By History */
-exports.histRank = function (req, res, next) {
-
 };

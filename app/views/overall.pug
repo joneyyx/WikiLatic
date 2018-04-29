@@ -112,18 +112,13 @@ block content
                           th Article
                           th History (year)
                         tbody
-                          tr
-                            td 1
-                            td #{title}
-                            td #{num}
-                          tr
-                            td 2
-                            td #{title}
-                            td #{num}
-                          tr
-                            td 3
-                            td #{title}
-                            td #{num}
+                          -i=1;
+                          for  article in maxHistory
+                            tr
+                              td= i
+                              td= article.title
+                              td= article.history
+                            -i++;
 
                     div.col-md-6#min-history
                       table.table.table-hover
@@ -134,18 +129,13 @@ block content
                           th Article
                           th History (year)
                         tbody
-                          tr
-                            td 1
-                            td #{title}
-                            td #{num}
-                          tr
-                            td 2
-                            td #{title}
-                            td #{num}
-                          tr
-                            td 3
-                            td #{title}
-                            td #{num}
+                          -i=1;
+                          for  article in minHistory
+                            tr
+                              td= i
+                              td= article.title
+                              td= article.history
+                            -i++;
 
             // Charts
             div#charts
