@@ -37,7 +37,7 @@ function getMaxAndMin(Counts, rank) {
 
 
 /** controller for Rank By Reversion */
-exports.revRank = function (req, res, next) {
+module.exports = function (req, res, next) {
     // set array to store the counts of each article
     let revCounts = [],
         userCounts = [];
@@ -56,6 +56,7 @@ exports.revRank = function (req, res, next) {
             // check whether @req.body.rank POSTed
             if (rank) {
                 result = getMaxAndMin(revCounts, rank);
+                req.session.rank = rank;
             } else {
                 result = getMaxAndMin(revCounts, 3);
             }
@@ -109,25 +110,6 @@ exports.revRank = function (req, res, next) {
 
             iterator(i + 1);
         });
-
-    })(0);
-};
-
-
-/** controller for Rank By Author */
-exports.authRank = function (req, res, next) {
-
-    // iterator 强行把异步变同步
-    (function iterator(i) {
-        // check if all collections have been traversed
-        if (i === titles.length) {
-            userCounts = userCounts.sort(compare('count'));
-
-
-
-            next();
-        }
-
 
     })(0);
 };
