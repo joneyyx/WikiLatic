@@ -134,7 +134,10 @@ block content
                             tr
                               td= i
                               td= article.title
-                              td= article.history
+                              if article.history == 0
+                                td #{'< 1'}
+                              else
+                                td= article.history
                             -i++;
 
             // Charts
