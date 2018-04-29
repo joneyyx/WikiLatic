@@ -29,29 +29,43 @@ block content
               div
                 div#byReversion.content
                   h2 Rank By Reversion
-                  form.form-inline
-                    input.form-control(type='text', placeholder='Num of articles')
+                  form.form-inline(method='POST')
+                    input.form-control(type='text', placeholder='Num of articles', name='rank')
                     input.btn.btn-outline-primary(type='submit', value='Search')
                   div.content-body.row
                     div.col-md-6#max-reversion
                       table.table.table-hover
                         thead.table-primary
                           tr
-                            h5 Top X Articles With Most Reversion
+                            h5 Top #{rank} Articles With Most Reversion
                           th #
                           th Article
                           th Num of reversion
                         tbody
+                        -var i=1;
+                        for  article in maxRev
+                          tr
+                            td= i
+                            td= article.title
+                            td= article.count
+                          -i++;
 
                     div.col-md-6#min-reversion
                       table.table.table-hover
                         thead.table-primary
                           tr
-                            h5 Top X Articles With Least Reversion
+                            h5 Top #{rank} Articles With Least Reversion
                           th #
                           th Article
                           th Num of reversion
                         tbody
+                        -i=1;
+                        for  article in minRev
+                          tr
+                            td= i
+                            td= article.title
+                            td= article.count
+                          -i++;
 
                 div#byUser.content
                   h2 Rank By User
@@ -68,8 +82,8 @@ block content
                           tbody
                             tr
                               td 1
-                              td #{title}
-                              td #{num}
+                              td= maxUser[0].title
+                              td= maxUser[0].count
 
                     div.col-md-6#min-users
                       table.table.table-hover
@@ -83,8 +97,8 @@ block content
                           tbody
                             tr
                               td 1
-                              td #{title}
-                              td #{num}
+                              td= minUser[0].title
+                              td= minUser[0].count
 
                 div#byHistory.content
                   h2 Rank By History
@@ -98,18 +112,13 @@ block content
                           th Article
                           th History (year)
                         tbody
-                          tr
-                            td 1
-                            td #{title}
-                            td #{num}
-                          tr
-                            td 2
-                            td #{title}
-                            td #{num}
-                          tr
-                            td 3
-                            td #{title}
-                            td #{num}
+                          -i=1;
+                          for  article in maxHistory
+                            tr
+                              td= i
+                              td= article.title
+                              td= article.history
+                            -i++;
 
                     div.col-md-6#min-history
                       table.table.table-hover
@@ -120,18 +129,16 @@ block content
                           th Article
                           th History (year)
                         tbody
-                          tr
-                            td 1
-                            td #{title}
-                            td #{num}
-                          tr
-                            td 2
-                            td #{title}
-                            td #{num}
-                          tr
-                            td 3
-                            td #{title}
-                            td #{num}
+                          -i=1;
+                          for  article in minHistory
+                            tr
+                              td= i
+                              td= article.title
+                              if article.history == 0
+                                td #{'< 1'}
+                              else
+                                td= article.history
+                            -i++;
 
             // Charts
             div#charts

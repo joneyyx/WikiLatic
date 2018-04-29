@@ -4,7 +4,8 @@ let router = express.Router();
 /* GET home page. */
 router.get('/', function (req, res, next) {
     res.render('individual', {
-        title: 'Express'
+        title: 'Individual Analytics',
+        user: req.session.user
     });
 });
 
